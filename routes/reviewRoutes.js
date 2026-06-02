@@ -4,7 +4,9 @@ import { protect } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
-router.route('/').post(protect, createReview); // Check token before adding review
-router.route('/:styleId').get(getReviewsByStyle);
+// 💡 Frontend se matching ke liye yahan '/:styleId' lagana zaroori tha
+router.route('/:styleId')
+  .post(protect, createReview)      // Post review (Token required)
+  .get(getReviewsByStyle);          // Get reviews for a specific style
 
 export default router;
